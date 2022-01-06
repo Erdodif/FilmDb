@@ -28,19 +28,19 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <TextField GridPane.rowIndex="1"/>
         <Label text="Cím"/>
         <Label text="Kategória" GridPane.columnIndex="1"/>
         <Label text="Hossz (perc)" GridPane.columnIndex="2"/>
         <Label text="Értékelés" GridPane.columnIndex="3"/>
-        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <Spinner GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <TextField GridPane.rowIndex="1" fx:id="cimTextField" promptText="A film címe"/>
+        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="kategoriaTextField" promptText="Kategória"/>
+        <Spinner GridPane.columnIndex="2" GridPane.rowIndex="1" fx:id="hosszSpinner" editable="true">
             <valueFactory>
                 <javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="100" min="0"
                                                                                      max="999" amountToStepBy="10"/>
             </valueFactory>
         </Spinner>
-        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="ertekelesChoiceBox">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <Integer fx:value="1"/>

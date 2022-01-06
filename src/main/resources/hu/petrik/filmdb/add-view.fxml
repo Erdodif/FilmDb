@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.Integer?>
+<?import javafx.scene.control.Button?>
+<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+          prefHeight="120.0" prefWidth="450.0" vgap="5" xmlns="http://javafx.com/javafx/17"
+          xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="hu.petrik.filmdb.AddViewController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+        <TextField GridPane.rowIndex="1"/>
+        <Label text="Cím"/>
+        <Label text="Kategória" GridPane.columnIndex="1"/>
+        <Label text="Hossz (perc)" GridPane.columnIndex="2"/>
+        <Label text="Értékelés" GridPane.columnIndex="3"/>
+        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Spinner GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <valueFactory>
+                <javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="100" min="0"
+                                                                                     max="999" amountToStepBy="10"/>
+            </valueFactory>
+        </Spinner>
+        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <Integer fx:value="1"/>
+                    <Integer fx:value="2"/>
+                    <Integer fx:value="3"/>
+                    <Integer fx:value="4"/>
+                    <Integer fx:value="5"/>
+                    <Integer fx:value="6"/>
+                    <Integer fx:value="7"/>
+                    <Integer fx:value="8"/>
+                    <Integer fx:value="9"/>
+                    <Integer fx:value="10"/>
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+        <Button GridPane.columnIndex="0" GridPane.rowIndex="2" text="Hozzáadás" onAction="#onHozzadasButtonClick"/>
+    </children>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+    </padding>
+</GridPane>

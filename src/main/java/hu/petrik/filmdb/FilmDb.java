@@ -28,4 +28,21 @@ public class FilmDb {
         }
         return filmek;
     }
+
+    public boolean addFilm(String cim, String kategoria, int hossz, int ertekeles) throws  SQLException{
+        String sql = "INSERT INTO `filmek` (cim, kategoria, hossz, ertekeles) VALUES(?,?,?,?)";
+        PreparedStatement prpstm = this.conn.prepareCall(sql);
+        prpstm.setString(1,cim);
+        prpstm.setString(2,kategoria);
+        prpstm.setInt(3,hossz);
+        prpstm.setInt(4,ertekeles);
+        return prpstm.executeUpdate() == 1;
+    }
+
+    public boolean deleteFilm(int id) throws SQLException{
+        String sql = "DELETE FROM `filmek` WHERE id = ?";
+        PreparedStatement prpstmt = conn.prepareStatement(sql);
+        prpstmt.setInt(1,id);
+        return prpstmt.executeUpdate() == 1;
+    }
 }

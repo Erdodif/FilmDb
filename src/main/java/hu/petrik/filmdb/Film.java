@@ -1,5 +1,7 @@
 package hu.petrik.filmdb;
 
+import java.util.Objects;
+
 public class Film {
     private int id;
     private String cim;
@@ -49,5 +51,23 @@ public class Film {
 
     public void setErtekeles(int ertekeles) {
         this.ertekeles = ertekeles;
+    }
+
+    @Override
+    public String toString() {
+        return "" +id + cim + kategoria + hossz + ertekeles ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Film film = (Film) o;
+        return id == film.id && hossz == film.hossz && ertekeles == film.ertekeles && cim.equals(film.cim) && kategoria.equals(film.kategoria);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cim, kategoria, hossz, ertekeles);
     }
 }

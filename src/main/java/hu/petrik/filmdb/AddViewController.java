@@ -10,10 +10,12 @@ import javafx.stage.Stage;
 
 import java.io.Console;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.regex.Pattern;
 
-public class AddViewController {
+public class AddViewController extends Controller{
     @FXML
     public Spinner<Integer> hosszSpinner;
     @FXML
@@ -29,37 +31,40 @@ public class AddViewController {
         String kategoria = kategoriaTextField.getText();
         //Pattern pattern = Pattern.compile("\\p{javaAlphabetic}");
         //boolean rendben = Pattern.matches(String.valueOf(pattern),cim);
-        Integer ertekelesIndex = ertekelesChoiceBox.getSelectionModel().getSelectedIndex();
+        int ertekelesIndex = ertekelesChoiceBox.getSelectionModel().getSelectedIndex();
         if(cim.isEmpty()){
-            smallAlert("A cím megadása kötelező!");
+            smallError("A cím megadása kötelező!");
             return;
         }
         if(kategoria.isEmpty()){
-            smallAlert("A kategória megadása kötelező!");
+            smallError("A kategória megadása kötelező!");
             return;
         }
         try {
             Integer hossz = hosszSpinner.getValue();
+            FilmDb db = new FilmDb();
+            if(ertekelesIndex == -1){
+                smallAlert("Értékelés megadása kötelező!");
+                return;
+            }
+            int ertekeles = ertekelesChoiceBox.getValue();
+            boolean siker = db.addFilm(cim,kategoria,hossz, ertekeles);
+            if(siker){
+                smallAlert("Sikeres hozzáadás!");
+                return;
+            }
+            smallAlert("Sikertelen hozzáadás!");
         }
         catch (NullPointerException e){
-            smallAlert("A hossz megadása kötelező!");
-            return;
+            smallError("A hossz megadása kötelező!");
+        }
+        catch (SQLException e){
+            smallError("SQL Hibe: "+e.getMessage());
         }
         catch (Exception e){
-            smallAlert("A hossznak egy 1 és 999 közötti egész számnak kell lennie!");
-            return;
+            smallError("A hossznak egy 1 és 999 közötti egész számnak kell lennie!");
         }
-        if(ertekelesIndex == -1){
-            smallAlert("Értékelés megadása kötelező!");
-            return;
-        }
-        System.err.println("K Cs");
     }
 
-    private void smallAlert(String s) {
-        Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.setContentText(s);
-        alert.getButtonTypes().add(ButtonType.OK);
-        alert.show();
-    }
+
 }

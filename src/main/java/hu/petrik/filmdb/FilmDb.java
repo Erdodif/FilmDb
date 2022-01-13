@@ -45,4 +45,15 @@ public class FilmDb {
         prpstmt.setInt(1,id);
         return prpstmt.executeUpdate() == 1;
     }
+
+    public boolean editFilm(Film film) throws SQLException{
+        String sql = "UPDATE `filmek` SET cim = ?, kategoria = ?, hossz = ?, ertekeles = ? WHERE id = ?;";
+        PreparedStatement prpstm = this.conn.prepareCall(sql);
+        prpstm.setString(1,film.getCim());
+        prpstm.setString(2,film.getKategoria());
+        prpstm.setInt(3,film.getHossz());
+        prpstm.setInt(4,film.getErtekeles());
+        prpstm.setInt(5,film.getId());
+        return prpstm.executeUpdate() == 1;
+    }
 }

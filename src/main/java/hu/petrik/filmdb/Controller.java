@@ -2,17 +2,24 @@ package hu.petrik.filmdb;
 
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogEvent;
-import javafx.stage.Window;
-import org.w3c.dom.events.Event;
+import javafx.stage.Stage;
 
-import java.util.Optional;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class Controller {
+
+    protected Stage stage;
+
+    public Stage getStage(){
+        return this.stage;
+    }
 
     private void showAlert(Alert.AlertType type, String s, EventHandler<DialogEvent> handler) {
         Alert alert = new Alert(type);
@@ -62,4 +69,20 @@ public abstract class Controller {
         return alert.showAndWait().get().equals(ButtonType.OK);
     }
 
+    protected void alertWait(String content){
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    protected static Controller newWindow(String fxml, String title,int width,int height) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(FilmApp.class.getResource(fxml));
+        Scene scene = new Scene(fxmlLoader.load(), width, height);
+        stage.setTitle(title);
+        stage.setScene(scene);
+        Controller controller = fxmlLoader.getController();
+        controller.stage = stage;
+        return controller;
+    }
 }

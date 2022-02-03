@@ -1,4 +1,4 @@
-package hu.petrik.filmdb;
+package hu.petrik.filmdb.data;
 
 import java.util.Objects;
 

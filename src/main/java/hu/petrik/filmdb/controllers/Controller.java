@@ -1,5 +1,6 @@
-package hu.petrik.filmdb;
+package hu.petrik.filmdb.controllers;
 
+import hu.petrik.filmdb.FilmApp;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;

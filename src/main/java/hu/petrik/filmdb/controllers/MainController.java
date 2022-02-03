@@ -1,12 +1,14 @@
 package hu.petrik.filmdb.controllers;
 
-import hu.petrik.filmdb.Controller;
-import hu.petrik.filmdb.Film;
-import hu.petrik.filmdb.FilmDb;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import hu.petrik.filmdb.data.Film;
+import hu.petrik.filmdb.data.FilmDb;
+import hu.petrik.filmdb.http.RequestHandler;
+import hu.petrik.filmdb.http.Response;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.WindowEvent;
@@ -43,12 +45,20 @@ public class MainController extends Controller {
 
     private void loadDB() {
         try {
-            List<Film> filmek = db.getFilmek();
+            Response response = RequestHandler.get("localhost:8080/filmapp/filmek");
+            String content = response.getContent();
+            if(response.getResponseCode() > 399){
+                smallError(content);
+                return;
+            }
+            Gson gaySon = new Gson();
+            gaySon.fromJson(content, (new TypeToken<List<Film>>(){}).getType());
+            List<Film> filmek = new ArrayList<>();
             filmTable.getItems().clear();
             for (Film film : filmek) {
                 filmTable.getItems().add(film);
             }
-        } catch (SQLException e) {
+        } catch (IOException e) {
             exceptionAllert(e);
         }
     }

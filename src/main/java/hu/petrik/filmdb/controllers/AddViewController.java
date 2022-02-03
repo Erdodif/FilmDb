@@ -1,7 +1,6 @@
 package hu.petrik.filmdb.controllers;
 
-import hu.petrik.filmdb.Controller;
-import hu.petrik.filmdb.FilmDb;
+import hu.petrik.filmdb.data.FilmDb;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

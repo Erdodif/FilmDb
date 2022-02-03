@@ -1,7 +1,8 @@
-package hu.petrik.filmdb;
+package hu.petrik.filmdb.data;
+
+import hu.petrik.filmdb.data.Film;
 
 import java.sql.*;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
